@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Task_ManagmentApi.Data;
+using Task_ManagmentApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//Register the AuthService with the dependency injection container
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
